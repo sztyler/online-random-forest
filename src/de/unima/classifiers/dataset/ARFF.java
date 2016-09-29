@@ -7,6 +7,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.*;
 
+/**
+ * ARFF (Attribute-Relation File Format). This module enables to load arff files that should be used for training or
+ * testing.
+ * More: http://www.cs.waikato.ac.nz/ml/weka/arff.html
+ *
+ * @author Timo Sztyler
+ * @version 29.09.2016
+ */
 public class ARFF implements DataSet {
     private List<Sample>         samples;
     private Map<String, Integer> classLabels;

@@ -5,6 +5,13 @@ import de.unima.classifiers.Utilities;
 import de.unima.classifiers.structure.Result;
 import de.unima.classifiers.structure.Sample;
 
+/**
+ * Online Random Node. This is the main construct, i.e., covers all information and the references to the succeeding
+ * subtrees, and the online random tests for this node. Each tree is initialized with such a node.
+ *
+ * @author Timo Sztyler
+ * @version 29.09.2016
+ */
 class RandomNode {
     private Config       config;
     private int          numClasses;

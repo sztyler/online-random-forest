@@ -12,6 +12,13 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.util.*;
 
+/**
+ * Cross-Validation. Provides the possibility to perform cross validation, i.e, split the loaded data set into n-folds
+ * where stratified sampling is performed. Subsequently, one fold is used for testing and the others for testing.
+ *
+ * @author Timo Sztyler
+ * @version 29.09.2016
+ */
 public class CrossValidation {
     private DataSet                    dataSet;
     private int                        numOfFolds;
@@ -111,109 +118,79 @@ public class CrossValidation {
         }
 
         // Export folds to files
-                try {
-                    File root = new File("folds");
-                    root.mkdir();
-                    File tmp = new File(root, Long.toString(System.currentTimeMillis()));
-                    tmp.mkdir();
-                    for (int i = 0; i < 10; i++) {
-                        int numSamplesTest  = 0;
-                        int numSamplesTrain = 0;
+        try {
+            File root = new File("folds");
+            root.mkdir();
+            File tmp = new File(root, Long.toString(System.currentTimeMillis()));
+            tmp.mkdir();
+            for (int i = 0; i < 10; i++) {
+                int numSamplesTest  = 0;
+                int numSamplesTrain = 0;
 
-                        for (int j = 0; j < 10; j++) {
-                            if (j == i) {
-                                numSamplesTest = folds.get(j).size();
-                            } else {
-                                numSamplesTrain += folds.get(j).size();
-                            }
-                        }
-
-                        int numFeatures = folds.get(0).get(0).getValues().length;
-
-                        File fold = new File(tmp, "fold" + i);
-                        fold.mkdir();
-                        File        train    = new File(fold, "train.data");
-                        PrintWriter outtrain = new PrintWriter(train);
-                        outtrain.println(numSamplesTrain + " " + numFeatures);
-
-                        File        trainlabel    = new File(fold, "train.label");
-                        PrintWriter outtrainlabel = new PrintWriter(trainlabel);
-                        outtrainlabel.println(numSamplesTrain + " 1");
-
-                        File        test    = new File(fold, "test.data");
-                        PrintWriter outtest = new PrintWriter(test);
-                        outtest.println(numSamplesTest + " " + numFeatures);
-
-                        File        testlabel    = new File(fold, "test.label");
-                        PrintWriter outtestlabel = new PrintWriter(testlabel);
-                        outtestlabel.println(numSamplesTest + " 1");
-
-                        for (int j = 0; j < 10; j++) {
-                            if (j == i) {
-                                List<Sample> samples = folds.get(j);
-                                for (Sample sample : samples) {
-                                    for (double d : sample.getValues()) {
-                                        outtest.print(d);
-                                        outtest.print(" ");
-                                    }
-                                    outtestlabel.println(sample.getLabel());
-                                    outtest.println();
-                                }
-                            } else {
-                                List<Sample> samples = folds.get(j);
-                                for (Sample sample : samples) {
-                                    for (double d : sample.getValues()) {
-                                        outtrain.print(d);
-                                        outtrain.print(" ");
-                                    }
-                                    outtrainlabel.println(sample.getLabel());
-                                    outtrain.println();
-                                }
-                            }
-                        }
-
-                        outtrain.flush();
-                        outtrain.close();
-                        outtrainlabel.flush();
-                        outtrainlabel.close();
-                        outtest.flush();
-                        outtest.close();
-                        outtestlabel.flush();
-                        outtestlabel.close();
+                for (int j = 0; j < 10; j++) {
+                    if (j == i) {
+                        numSamplesTest = folds.get(j).size();
+                    } else {
+                        numSamplesTrain += folds.get(j).size();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
 
-        // DEBUG
-        //        Set<Integer> idsold = new HashSet<>();
-        //        for(Sample sample : dataSet.getSamples()) {
-        //            idsold.add(sample.getId());
-        //        }
-        //        System.out.println(dataSet.getSamples().size()+" -- "+idsold.size());
-        //
-        //        int i = 0;
-        //        Set<Integer> ids = new HashSet<>();
-        //        for (Integer key : folds.keySet()) {
-        //            System.out.println("Key: " + key + " -- " + folds.get(key).size());
-        //            i += folds.get(key).size();
-        //
-        //            // Map<Integer, Integer> classes = new HashMap<>();
-        //            for (Sample sample : folds.get(key)) {
-        //                // if (!classes.containsKey(sample.getLabel())) {
-        //                //  classes.put(sample.getLabel(), 0);
-        //                // }
-        //                //
-        //                // classes.put(sample.getLabel(), classes.get(sample.getLabel()) + 1);
-        //
-        //                ids.add(sample.getId());
-        //            }
-        //            //
-        //            // for (Integer key2 : classes.keySet()) {
-        //            // System.out.println(key2 + ": " + classes.get(key2));
-        //            // }
-        //        }
-        //        System.out.println(i + " -- " + ids.size());
+                int numFeatures = folds.get(0).get(0).getValues().length;
+
+                File fold = new File(tmp, "fold" + i);
+                fold.mkdir();
+                File        train    = new File(fold, "train.data");
+                PrintWriter outtrain = new PrintWriter(train);
+                outtrain.println(numSamplesTrain + " " + numFeatures);
+
+                File        trainlabel    = new File(fold, "train.label");
+                PrintWriter outtrainlabel = new PrintWriter(trainlabel);
+                outtrainlabel.println(numSamplesTrain + " 1");
+
+                File        test    = new File(fold, "test.data");
+                PrintWriter outtest = new PrintWriter(test);
+                outtest.println(numSamplesTest + " " + numFeatures);
+
+                File        testlabel    = new File(fold, "test.label");
+                PrintWriter outtestlabel = new PrintWriter(testlabel);
+                outtestlabel.println(numSamplesTest + " 1");
+
+                for (int j = 0; j < 10; j++) {
+                    if (j == i) {
+                        List<Sample> samples = folds.get(j);
+                        for (Sample sample : samples) {
+                            for (double d : sample.getValues()) {
+                                outtest.print(d);
+                                outtest.print(" ");
+                            }
+                            outtestlabel.println(sample.getLabel());
+                            outtest.println();
+                        }
+                    } else {
+                        List<Sample> samples = folds.get(j);
+                        for (Sample sample : samples) {
+                            for (double d : sample.getValues()) {
+                                outtrain.print(d);
+                                outtrain.print(" ");
+                            }
+                            outtrainlabel.println(sample.getLabel());
+                            outtrain.println();
+                        }
+                    }
+                }
+
+                outtrain.flush();
+                outtrain.close();
+                outtrainlabel.flush();
+                outtrainlabel.close();
+                outtest.flush();
+                outtest.close();
+                outtestlabel.flush();
+                outtestlabel.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private Map<Result, Integer> trainAndTest() {

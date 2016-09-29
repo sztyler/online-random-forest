@@ -5,6 +5,13 @@ import de.unima.classifiers.online.Classifier;
 import de.unima.classifiers.structure.Result;
 import de.unima.classifiers.structure.Sample;
 
+/**
+ * Online Random Tree. This class comprises only the root node whereas the root node redirects to the subtrees.
+ * This is a binary tree.
+ *
+ * @author Timo Sztyler
+ * @version 29.09.2016
+ */
 class RandomTree implements Classifier {
     private RandomNode rootNode;
 

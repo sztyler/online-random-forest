@@ -6,6 +6,12 @@ import java.lang.management.ManagementFactory;
 import java.nio.ByteBuffer;
 import java.util.Random;
 
+/**
+ * This class provides some basic functions, e.g., generating random values.
+ *
+ * @author Timo Sztyler
+ * @version 29.09.2016
+ */
 public class Utilities {
     public static int poisson(double A) {
         int k    = 0;

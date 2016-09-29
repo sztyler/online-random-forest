@@ -1,5 +1,11 @@
 package de.unima.classifiers.structure;
 
+/**
+ * Container that covers a single sample/record, i.e., feature values, the corresponding label, and a optional weight.
+ *
+ * @author Timo Sztyler
+ * @version 29.09.2016
+ */
 public class Sample {
 
     private double[] values;

@@ -7,6 +7,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.*;
 
+/**
+ * OMCLP is a modification of the common LibSVM format. This module enables to load OMCLP files that should be used for
+ * training or testing. This file format was used by the original implementation.
+ * More: https://github.com/amirsaffari/online-multiclass-lpboost
+ *
+ * @author Timo Sztyler
+ * @version 29.09.2016
+ */
 public class OMCLP implements DataSet {
     private List<Sample>         samples;
     private Map<String, Integer> classLabels;

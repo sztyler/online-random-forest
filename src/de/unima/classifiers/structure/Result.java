@@ -1,5 +1,12 @@
 package de.unima.classifiers.structure;
 
+/**
+ * Container that is used to store and provide classification results but also confidence values regarding all possible
+ * target classes.
+ *
+ * @author Timo Sztyler
+ * @version 29.09.2016
+ */
 public class Result {
 
     private double[] confidence;

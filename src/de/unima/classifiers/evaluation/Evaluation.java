@@ -7,6 +7,13 @@ import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.Map;
 
+/**
+ * Evaluation. This module provides the possibility to calculate common statistics concerning of the performance of the
+ * trained and testes classification model. This includes, precision, recall, F-measure, confusion matrix, etc.
+ *
+ * @author Timo Sztyler
+ * @version 29.09.2016
+ */
 public class Evaluation {
     private Map<Result, Integer> results;
     private int                  numOfClasses;
@@ -249,9 +256,5 @@ public class Evaluation {
             out.println("Total Number of Instances           " + total);
             out.println();
         }
-
-        // Correctly Classified Instances        6006               72.6503 %
-        // Incorrectly Classified Instances      2261               27.3497 %
-        // Total Number of Instances             8267
     }
 }

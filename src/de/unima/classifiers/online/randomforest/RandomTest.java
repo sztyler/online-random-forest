@@ -4,6 +4,14 @@ import de.unima.classifiers.Config;
 import de.unima.classifiers.Utilities;
 import de.unima.classifiers.structure.Sample;
 
+/**
+ * Random Test. This kind of tests are generated for each new node. The number of tests are predefined and each test
+ * covers a specific attribute/feature and a corresponding threshold. The threshold is generated at random. This tests
+ * are used to determine the best split for a node. If a decision is made, the tests are removed.
+ *
+ * @author Timo Sztyler
+ * @version 29.09.2016
+ */
 class RandomTest {
     private Config     config;
     private int        numClasses;

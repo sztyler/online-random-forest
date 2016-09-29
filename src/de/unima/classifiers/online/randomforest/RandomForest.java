@@ -6,6 +6,14 @@ import de.unima.classifiers.online.Classifier;
 import de.unima.classifiers.structure.Result;
 import de.unima.classifiers.structure.Sample;
 
+/**
+ * Online Random Forest Classifier. Basis structure to train and use this classifier. The number of trees, target
+ * classes, and considered features has to be predefined. There is no batch training or testing mode, i.e., each sample
+ * has to be passed successively to the classifier.
+ *
+ * @author Timo Sztyler
+ * @version 29.09.2016
+ */
 public class RandomForest implements Classifier {
     private Config       config;
     private RandomTree[] trees;
