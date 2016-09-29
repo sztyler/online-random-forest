@@ -76,7 +76,7 @@ public class CrossValidation {
 
         for (Sample sample : this.dataSet.getSamples()) {
             if (!samplesByClass.containsKey(sample.getLabel())) {
-                samplesByClass.put(sample.getLabel(), new ArrayList<>());
+                samplesByClass.put(sample.getLabel(), new ArrayList<Sample>());
             }
             samplesByClass.get(sample.getLabel()).add(sample);
         }
@@ -88,7 +88,7 @@ public class CrossValidation {
         }
 
         for (int i = 0; i < this.numOfFolds; i++) {
-            this.folds.put(i, new ArrayList<>());
+            this.folds.put(i, new ArrayList<Sample>());
 
             for (Integer key : samplesByClass.keySet()) {
                 List<Sample> values = samplesByClass.get(key);
