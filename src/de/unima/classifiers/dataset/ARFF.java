@@ -3,8 +3,8 @@ package de.unima.classifiers.dataset;
 import de.unima.classifiers.structure.Sample;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.*;
 
 /**
@@ -13,7 +13,7 @@ import java.util.*;
  * More: http://www.cs.waikato.ac.nz/ml/weka/arff.html
  *
  * @author Timo Sztyler
- * @version 29.09.2016
+ * @version 19.01.2017
  */
 public class ARFF implements DataSet {
     private List<Sample>         samples;
@@ -35,17 +35,16 @@ public class ARFF implements DataSet {
     }
 
     @Override
-    public void load(String path, Map<String, Integer> classLabels) {
+    public void load(InputStream is, Map<String, Integer> classLabels) {
         this.classLabels = classLabels;
-        this.load(path);
+        this.load(is);
     }
 
     @Override
-    public void load(String path) {
-        File    dataSet = new File(path);
-        boolean flag    = false;
+    public void load(InputStream is) {
+        boolean flag = false;
 
-        try (BufferedReader br = new BufferedReader(new FileReader(dataSet))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
             for (String line; (line = br.readLine()) != null; ) {
                 if (line.length() == 0 || line.charAt(0) == '%') {
                     continue;

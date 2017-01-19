@@ -5,6 +5,7 @@ import de.unima.classifiers.structure.Sample;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.InputStream;
 import java.util.*;
 
 /**
@@ -13,7 +14,7 @@ import java.util.*;
  * More: https://github.com/amirsaffari/online-multiclass-lpboost
  *
  * @author Timo Sztyler
- * @version 29.09.2016
+ * @version 19.01.2017
  */
 public class OMCLP implements DataSet {
     private List<Sample>         samples;
@@ -32,12 +33,22 @@ public class OMCLP implements DataSet {
     }
 
     @Override
+    public void load(InputStream is, Map<String, Integer> classLabels) {
+        // TODO
+    }
+
+    @Override
+    public void load(InputStream is) {
+        // TODO
+    }
+
+    @Deprecated
     public void load(String path, Map<String, Integer> classLabels) {
         this.classLabels = classLabels;
         this.load(path);
     }
 
-    @Override
+    @Deprecated
     public void load(String path) {
         File dataSet = new File(path + ".structure");
         File labels  = new File(path + ".labels");

@@ -2,6 +2,7 @@ package de.unima.classifiers.dataset;
 
 import de.unima.classifiers.structure.Sample;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -9,12 +10,12 @@ import java.util.Map;
  * Interface for data set structures that should be used to train or test a classifier.
  *
  * @author Timo Sztyler
- * @version 29.09.2016
+ * @version 19.01.2017
  */
 public interface DataSet {
-    void load(String path);
+    void load(InputStream is);
 
-    void load(String path, Map<String, Integer> classLabels);
+    void load(InputStream is, Map<String, Integer> classLabels);
 
     void randomize();
 
