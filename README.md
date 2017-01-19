@@ -7,7 +7,9 @@ Download: [latest build](https://github.com/sztyler/online-random-forest/release
 ## Usage
 ```java
 DataSet data = new ARFF();
-data.load("data.arff");
+File file = new File("data.arff");
+InputStream is = new FileInputStream(file);
+data.load(is);
 RandomForest rf = new RandomForest(...)
 
 for (int nEpoch = 0; nEpoch < config.numEpochs; nEpoch++) { // train
